@@ -1,0 +1,1 @@
+{"buckets":[{"name":"demo-bucket","public_access_block":{"BlockPublicAcls":true,"IgnorePublicAcls":true,"BlockPublicPolicy":false}}],"functions":[{"name":"demo-function","function_url_auth":"NONE","environment_keys":["APP_TOKEN"]}]}
