@@ -8,6 +8,8 @@ S3_CONTROLS = ("BlockPublicAcls", "IgnorePublicAcls",
 
 
 def audit(snapshot):
+    if not isinstance(snapshot, dict) or not {"buckets", "functions"} & snapshot.keys():
+        raise ValueError("expected an inventory with buckets or functions")
     findings = []
     for bucket in snapshot.get("buckets", []):
         for flag in S3_CONTROLS:
@@ -40,4 +42,10 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except (OSError, ValueError, TypeError, KeyError, AttributeError, IndexError) as exc:
+        import sys
+
+        print(f"Invalid input: {exc}", file=sys.stderr)
+        raise SystemExit(2) from None

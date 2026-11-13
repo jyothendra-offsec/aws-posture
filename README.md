@@ -1,11 +1,38 @@
 # AWS Posture
 
-Review S3 public access block settings and Lambda configuration from local inventory JSON. Findings are review leads. Supply environment variable names only.
+Review exported S3 and Lambda configuration for follow-up.
 
-Requires Python 3.10+. Run from the repo root with the synthetic examples.
+## Quick start
 
-```bash
+Use Python 3.10 or newer. The CLI runs locally with the standard library. From the repository root, run:
+
+```sh
 python3 main.py example.json
 ```
 
-The CLI prints JSON. Use the included examples as input schema references.
+The sample flags one disabled bucket control, one missing control, one function URL configured with `NONE`, and one environment key name for review.
+
+## Input and output
+
+| Input | Format | Output or purpose |
+| --- | --- | --- |
+| `buckets[]` | `name`, optional `public_access_block` with AWS boolean flags | `disabled` or `unknown` per control |
+| `functions[]` | `name`, optional `function_url_auth` and `environment_keys` | URL auth and sensitive-name review leads |
+
+Results are JSON on stdout. Redirect to a file when you want to save the review.
+
+## Interpreting results
+
+A bucket-level flag alone does not establish effective public access. Review account-level controls and resource policy. Supply environment key names only. The tool neither retrieves values nor connects to AWS.
+
+## Troubleshooting
+
+- Use the included fixture first to confirm the command and working directory.
+- Check the input path and required fields if the CLI exits with status 2.
+- Keep real assessment exports and generated reports in your private workspace.
+
+## Verify locally
+
+```sh
+python3 -m unittest discover -s tests -v
+```
