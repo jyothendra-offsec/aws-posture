@@ -40,3 +40,7 @@ python3 -m unittest discover -s tests -v
 ## Review workflow
 
 Start with resources reported as unknown. Collect missing configuration before treating an empty findings array as evidence of coverage. Keep the inventory scope and timestamp with the output.
+
+## Usage terms
+
+Original material in this revision requires the owner's written permission for modification or redistribution. Earlier MIT releases and third-party licenses retain their terms. See [LICENSE](LICENSE).
