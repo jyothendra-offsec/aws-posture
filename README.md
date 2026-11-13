@@ -36,3 +36,7 @@ A bucket-level flag alone does not establish effective public access. Review acc
 ```sh
 python3 -m unittest discover -s tests -v
 ```
+
+## Review workflow
+
+Start with resources reported as unknown. Collect missing configuration before treating an empty findings array as evidence of coverage. Keep the inventory scope and timestamp with the output.
